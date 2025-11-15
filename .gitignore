@@ -4,3 +4,7 @@ venv/
 .env/
 .idea/
 *.log
+dist/
+build/
+*.egg-info/
+ds_lib_venv/

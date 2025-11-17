@@ -8,6 +8,9 @@ from sapdswsdlclient.server.re_auth import re_logon
 
 class Dataflow:
     def __init__(self, server_instance):
+        """
+        :param server_instance: server instance object
+        """
         self._server = server_instance
         self.request_template = request_template
         self.headers = headers

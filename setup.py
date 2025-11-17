@@ -5,7 +5,7 @@ with open('README.md', 'r', encoding='utf-8') as fh:
 
 setup(
     name='sapdswsdlclient',
-    version='0.1.1',
+    version='0.1.2',
     description='A Python library for SAP Data Services',
     long_description=long_description,
     long_description_content_type='text/markdown',
@@ -15,7 +15,8 @@ setup(
         'sapdswsdlclient.server',
         'sapdswsdlclient.models',
         'sapdswsdlclient.exceptions',
-        'sapdswsdlclient.templates'
+        'sapdswsdlclient.templates',
+        'sapdswsdlclient.utilities'
     ],
     url='https://github.com/sparklingSky/sap-ds-web-service-client',
     license='Custom Dual License',

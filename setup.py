@@ -15,8 +15,7 @@ setup(
         'sapdswsdlclient.server',
         'sapdswsdlclient.models',
         'sapdswsdlclient.exceptions',
-        'sapdswsdlclient.templates',
-        'sapdswsdlclient.utilities'
+        'sapdswsdlclient.templates'
     ],
     url='https://github.com/sparklingSky/sap-ds-web-service-client',
     license='Custom Dual License',

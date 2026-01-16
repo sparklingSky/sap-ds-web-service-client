@@ -12,10 +12,10 @@ This library can simplify your operations on SAP DS server with utilizing its we
 * retrieve a list of system configurations, substitution parameters, and batch job global variables;
 * etc.
 
-For use cases, explore [test_client](test_client.py)
+For use cases, explore [test_client](https://github.com/sparklingSky/sap-ds-web-service-client/blob/main/test_client.py)
 
 ## ⚖️ License
 This library is distributed under a **Custom Dual License**.
 It permits **free use for non-commercial or internal business purposes only**.
 
-**Commercial distribution** requires a separate commercial license. Please see the full terms in the [LICENSE.md](LICENSE.md) file.
+**Commercial distribution** requires a separate commercial license. Please see the full terms in the [LICENSE.md](https://github.com/sparklingSky/sap-ds-web-service-client/blob/main/LICENSE.md) file.

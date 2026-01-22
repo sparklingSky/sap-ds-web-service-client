@@ -57,7 +57,8 @@ class BatchJob:
                 job_exe_details.append(job_item)
             return job_exe_details
         else:
-            return {'returnCode': '0', 'returnMessage': 'No job execution details found'}
+            return [{'JobName': job_name, 'ObjID': None, 'RunID': None, 'StartTime': None, 'EndTime': None,
+                    'ExecutionTime': None, 'Status': 'No job execution details found', 'JobServerUsed': None}]
 
 
     def get_detail(self, repo_name, job_name):
@@ -79,7 +80,8 @@ class BatchJob:
 
         check_for_fault_or_error(response, ['ErrorMessage', 'faultstring'])
 
-        job_details = list()
+        job_details = {'globalVariables': None,
+                       'systemConfigurations': None, 'substitutionParameters': None}
 
         global_variables = response.find('.//globalVariables')
         system_configurations = response.find('.//systemConfigurations')
@@ -92,9 +94,9 @@ class BatchJob:
                 if var is not None:
                     var_dict['name'] = var.get('name')
                     var_dict['type'] = var.get('type')
-                    var_dict['default_value'] =  var.text
+                    var_dict['default_value'] = var.text
                     var_list.append(var_dict)
-            job_details.append({'globalVariables': var_list})
+            job_details['globalVariables'] = var_list
 
         if system_configurations is not None:
             config_list = list()
@@ -102,7 +104,7 @@ class BatchJob:
                 if conf is not None:
                     config_list.append(conf.get('name'))
             system_configurations_instance = SystemConfigurations(config_list)
-            job_details.append(system_configurations_instance)
+            job_details['systemConfigurations'] = system_configurations_instance
 
         if substitution_parameters is not None:
             param_list = list()
@@ -110,9 +112,9 @@ class BatchJob:
                 if param is not None:
                     param_list.append({param.get('name'): param.text})
             substitution_parameters_instance = SubstitutionParameters(param_list)
-            job_details.append(substitution_parameters_instance)
+            job_details['substitutionParameters'] = substitution_parameters_instance
 
-            return job_details
+        return job_details
 
 
     def get_by_time_range(self, repo_name, range_start_time, range_end_time, job_name: Optional[str] = ''):
@@ -151,7 +153,8 @@ class BatchJob:
                 jobs_by_time_range.append(job_item)
             return jobs_by_time_range
         else:
-            return f'No jobs found in the time range {range_start_time} - {range_end_time}.'
+            return [{'JobName': job_name, 'ObjID': None, 'RunID': None, 'StartTime': None, 'EndTime': None,
+                    'ExecutionTime': None, 'Status': 'No job execution details found', 'JobServerUsed': None}]
 
 
     def get_list(self, repo_name, is_all_batch_jobs: Literal[0, 1] = 1):
@@ -473,6 +476,7 @@ class BatchJob:
         check_for_fault_or_error(response, ['errorMessage', 'faultstring'])
 
         run_status = dict()
+        run_status['jobName'] = job_name
         run_status['processID'] = response.find('.//pid').text
         run_status['counterID'] = response.find('.//cid').text
         run_status['runID'] = response.find('.//rid').text
